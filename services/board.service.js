@@ -9,6 +9,7 @@ export const boardService = {
   addGroup,
   addTask,
   moveTask,
+  addActivity
 }
 
 async function query(filterBy = {}) {
@@ -72,4 +73,21 @@ async function moveTask(boardId, groupId, taskId, newGroupId) {
   const toGroup = board.groups.find((g) => g.id === newGroupId)
   toGroup.tasks.push(task)
   return await save(board)
+}
+
+async function addActivity(boardId, activity) {
+  const board = await getById(boardId)
+  const newActivity = {
+    id: makeId(),
+    ...activity,
+    createdAt: Date.now()
+  }
+
+  if (!board.activities) {
+    board.activities = []
+  }
+
+  board.activities.push(newActivity)
+  await save(board)
+  return newActivity
 }
