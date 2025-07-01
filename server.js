@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'production') {
       'http://127.0.0.1:5173',
       'http://localhost:5173',
       'http://127.0.0.1:5174',
-      'http://localhost:5174'
+      'http://localhost:5174',
     ],
     credentials: true,
   }
@@ -171,6 +171,20 @@ app.get('/secret', (req, res) => {
     res.send(process.env.SECRET_STR)
   } else {
     res.send('No secret string attached')
+  }
+})
+
+app.get('/test-board', async (req, res) => {
+  try {
+    res.json({
+      boardServiceExists: !!boardService,
+      boardServiceType: typeof boardService,
+      hasQueryMethod: typeof boardService?.query,
+      nodeEnv: process.env.NODE_ENV,
+      message: 'Debug test successful',
+    })
+  } catch (err) {
+    res.status(500).json({ error: err.message })
   }
 })
 
