@@ -6,6 +6,10 @@ export const dbService = {
 }
 
 let dbConn = null
+// Debug: Show what URL we're actually trying to connect to
+console.log('🔍 DEBUG: Attempting to connect to MongoDB...')
+console.log('🔍 DEBUG: config.dbURL =', config.dbURL)
+console.log('🔍 DEBUG: config.dbName =', config.dbName)
 
 async function getCollection(collectionName) {
   try {
