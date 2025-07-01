@@ -9,6 +9,8 @@ export const boardService = {
   addGroup,
   addTask,
   moveTask,
+  saveTask,
+  addActivity,
 }
 
 async function query(filterBy = {}) {
@@ -71,5 +73,29 @@ async function moveTask(boardId, groupId, taskId, newGroupId) {
   fromGroup.tasks = fromGroup.tasks.filter((t) => t.id !== taskId)
   const toGroup = board.groups.find((g) => g.id === newGroupId)
   toGroup.tasks.push(task)
+  return await save(board)
+}
+
+async function saveTask(boardId, groupId, task, activity) {
+  const board = await getById(boardId)
+  const group = board.groups.find((g) => g.id === groupId)
+
+  const taskIdx = group.tasks.findIndex((t) => t.id === task.id)
+  if (taskIdx !== -1) {
+    group.tasks[taskIdx] = task
+  } else {
+    group.tasks.push(task)
+  }
+
+  if (activity) {
+    board.activities.unshift(activity)
+  }
+
+  return await save(board)
+}
+
+async function addActivity(boardId, activity) {
+  const board = await getById(boardId)
+  board.activities.unshift(activity)
   return await save(board)
 }

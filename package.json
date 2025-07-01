@@ -13,12 +13,16 @@
     "author": "Me",
     "license": "ISC",
     "dependencies": {
-        "bcrypt": "^5.0.0",
+        "@google/generative-ai": "^0.24.1",
+        "bcrypt": "^5.1.1",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "cryptr": "^6.0.3",
+        "dotenv": "^17.0.0",
         "express": "^5.1.0",
+        "express-session": "^1.18.1",
         "mongodb": "^6.6.2",
+        "openai": "^5.8.2",
         "socket.io": "^4.2.0"
     },
     "devDependencies": {
