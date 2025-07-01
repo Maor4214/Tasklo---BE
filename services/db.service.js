@@ -1,12 +1,8 @@
 import { MongoClient } from 'mongodb'
+import { config } from '../config/index.js'
 
 export const dbService = {
   getCollection,
-}
-
-const config = {
-  dbURL: 'mongodb://127.0.0.1:27017',
-  dbName: 'tasklo_db',
 }
 
 let dbConn = null

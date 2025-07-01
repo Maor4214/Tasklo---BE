@@ -1,9 +1,11 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 import http from 'http'
 import path from 'path'
 import cors from 'cors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import dotenv from 'dotenv'
 import session from 'express-session'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
@@ -11,8 +13,6 @@ import { authRoutes } from './api/auth/auth.routes.js'
 import { boardService } from './services/board.service.js'
 import { setupSocketAPI } from './services/socket.service.js'
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
-
-dotenv.config()
 
 const app = express()
 const server = http.createServer(app)
