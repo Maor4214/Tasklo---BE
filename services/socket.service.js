@@ -90,7 +90,7 @@ export function setupSocketAPI(http) {
                 const updatedBoard = await boardService.addGroup(boardId, groupData)
                 const addedGroup = updatedBoard.groups[updatedBoard.groups.length - 1]
 
-                socket.to(`board:${boardId}`).emit('group-added', {
+                gIo.to(`board:${boardId}`).emit('group-added', {
                     boardId,
                     ...addedGroup
                 })
@@ -138,7 +138,7 @@ export function setupSocketAPI(http) {
                 board.groups = board.groups.filter(g => g.id !== groupId)
                 await boardService.save(board)
 
-                socket.to(`board:${boardId}`).emit('group-deleted', {
+                gIo.to(`board:${boardId}`).emit('group-deleted', {
                     boardId,
                     groupId
                 })
@@ -186,7 +186,9 @@ export function setupSocketAPI(http) {
                 const group = updatedBoard.groups.find(g => g.id === groupId)
                 const addedTask = group.tasks[group.tasks.length - 1]
 
-                socket.to(`board:${boardId}`).emit('task-added', {
+                console.log('🟢 Backend: Sending task-added with ID:', addedTask.id)
+
+                gIo.to(`board:${boardId}`).emit('task-added', {
                     boardId,
                     groupId,
                     ...addedTask
@@ -249,7 +251,7 @@ export function setupSocketAPI(http) {
                 group.tasks = group.tasks.filter(t => t.id !== taskId)
                 await boardService.save(board)
 
-                socket.to(`board:${boardId}`).emit('task-deleted', {
+                gIo.to(`board:${boardId}`).emit('task-deleted', {
                     boardId,
                     taskId,
                     groupId
@@ -303,7 +305,7 @@ export function setupSocketAPI(http) {
                 board.activities.push(newActivity)
                 await boardService.save(board)
 
-                socket.to(`board:${boardId}`).emit('activity-added', {
+                gIo.to(`board:${boardId}`).emit('activity-added', {
                     boardId,
                     activity: newActivity
                 })
