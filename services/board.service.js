@@ -1,5 +1,6 @@
 import { dbService } from './db.service.js'
 import { ObjectId } from 'mongodb'
+import { makeId } from './util.service.js'
 
 export const boardService = {
   query,
@@ -52,7 +53,7 @@ async function remove(boardId) {
 
 async function addGroup(boardId, group) {
   const board = await getById(boardId)
-  group.id = _makeId()
+  group.id = makeId()
   group.tasks = []
   board.groups.push(group)
   return await save(board)
@@ -61,7 +62,7 @@ async function addGroup(boardId, group) {
 async function addTask(boardId, groupId, task) {
   const board = await getById(boardId)
   const group = board.groups.find((g) => g.id === groupId)
-  task.id = _makeId()
+  task.id = makeId()
   group.tasks.push(task)
   return await save(board)
 }
