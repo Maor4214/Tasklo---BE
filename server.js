@@ -14,6 +14,7 @@ import cron from 'node-cron'
 import { authRoutes } from './api/auth/auth.routes.js'
 import { boardService } from './services/board.service.js'
 import { setupSocketAPI } from './services/socket.service.js'
+import { userService } from './api/user/user.service.js'
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 
@@ -71,10 +72,19 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        console.log(
+          '✅ Google OAuth profile:',
+          JSON.stringify(profile, null, 2)
+        )
+        console.log('🔑 Access Token:', accessToken)
+
         const user = await userService.getOrCreateGoogleUser(profile)
-        done(null, user)
+
+        console.log('✅ User found/created:', user)
+        return done(null, user)
       } catch (err) {
-        done(err)
+        console.error('❌ Error in Google OAuth callback:', err)
+        return done(err)
       }
     }
   )
