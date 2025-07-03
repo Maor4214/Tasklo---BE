@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import passport from 'passport'
+import cron from 'node-cron'
 
 import { authRoutes } from './api/auth/auth.routes.js'
 import { boardService } from './services/board.service.js'
@@ -19,6 +20,7 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 const app = express()
 const server = http.createServer(app)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+const isProduction = process.env.NODE_ENV === 'production'
 
 app.use(cookieParser())
 app.use(express.json())
@@ -63,17 +65,38 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: '/auth/google/callback',
+      callbackURL: isProduction
+        ? 'https://tasklo.onrender.com/auth/google/callback'
+        : 'http://localhost:3031/auth/google/callback',
     },
-    (accessToken, refreshToken, profile, done) => {
-      console.log('✅ Google Profile:', profile)
-      return done(null, profile)
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const user = await userService.getOrCreateGoogleUser(profile)
+        done(null, user)
+      } catch (err) {
+        done(err)
+      }
     }
   )
 )
 
 passport.serializeUser((user, done) => done(null, user))
 passport.deserializeUser((user, done) => done(null, user))
+
+//Wake-up
+app.get('/wake-up', (req, res) => {
+  res.send('Service is awake and working')
+})
+
+// Wake-up task to keep the service active
+cron.schedule('*/13 * * * *', async () => {
+  try {
+    console.log('Wake-up task running')
+    await axios.get(`https://YourRenderUrlHere.com/wake-up`)
+  } catch (error) {
+    console.error('Error during wake-up task:', error)
+  }
+})
 
 //google login routes
 
@@ -239,10 +262,14 @@ app.post('/api/ai/board', async (req, res) => {
   try {
     const { description, timeline } = req.body
 
+    // קבלת זמן נוכחי במילישניות כדי לעזור למודל לחשב תאריכים עתידיים
+    const currentTimestamp = Date.now()
+
     const combinedPrompt = `
 You are a helpful assistant that creates project boards like Trello.
 Your main goal is to generate a project board that precisely matches the provided JSON structure.
 You MUST adhere to this structure strictly and DO NOT invent new keys, object types, or deviate from the specified formats.
+**IMPORTANT:** Your entire response MUST be valid JSON, and nothing else. Do not include any preambles, explanations, or additional text outside the JSON object.
 
 Structure reference:
 {
@@ -351,21 +378,34 @@ Rules to follow strictly:
 - All IDs (_id, id) MUST be simple unique strings (e.g., short alphanumeric strings like "abc123"). Do not use UUID format unless explicitly requested.
 - Timestamps (createdAt, dueDate) MUST be numerical Unix timestamps (milliseconds since epoch).
 - For 'style.background':
-    - If you choose an image, it MUST be a valid Unsplash URL (e.g., https://images.unsplash.com/photo-...).
-    - If you choose a hex color (e.g., "#FF5733"), 'color' MUST be a valid hex string or null.
-    - If 'style.background' is an Unsplash URL (image), 'style.color' MUST be null.
-    - If 'style.background' is a hex color, 'style.color' can be a hex string (for text color) or null.
-- All image URLs (imgUrl, attachments.url) MUST be valid public image URLs. For member images, you can use placeholder images or generate realistic-looking URLs.
+    - If you choose an image, Use a Picsum Photos URL with a seed based on the board title or ID, in the following format:
+  https://picsum.photos/seed/<board-title-or-id>/800/600
+  Example: for a board with title "project-x", the image URL should be:
+  https://picsum.photos/seed/project-x/800/600
+  This ensures the board background is consistent for each board.
+
+
+For 'style.color':
+- If 'style.background' is an image URL, 'style.color' MUST be null.
+- If 'style.background' is a hex color, 'style.color' may be a hex string or null.
+
+- **IMPORTANT IMAGE RULE:** All imgUrl (for members) and attachments.url MUST be valid public placeholder image URLs. Examples:
+    - https://i.pravatar.cc/150?img=1 (for random user images, you can increment the number for different images)
+    - https://picsum.photos/400/300 (for general placeholder images, you can vary dimensions)
+    - **DO NOT use complex Unsplash URLs for these fields.**
 - Reuse 'members' objects and their IDs where needed across tasks and activities to simulate real user interactions.
 - DO NOT invent any new keys or object types that are not explicitly defined in the 'Structure reference'.
 - Ensure all arrays (labels, members, groups, tasks, comments, memberIds, labelIds, attachments, checklists, todos, activities) are populated with realistic data relevant to the project description.
 - Provide a diverse set of example data where applicable (e.g., different statuses, due dates, label combinations).
 - **NEW RULE:** All 'tasks' must have a 'status' of "in-progress". No tasks should be "done".
-- **NEW RULE:** All 'dueDate' values for tasks MUST be timestamps representing a date in the future (relative to the current time when the prompt is generated), or 'null'. Do not generate past due dates.
-- **NEW RULE:** The 'activities' array should contain at most one activity. If an activity is present, it MUST be a single activity describing the creation of the board by the 'createdBy' member (e.g., "Board created by [fullname]"). Do not include any other historical activities.
+- **IMPORTANT RULE:** All 'dueDate' values for tasks MUST be timestamps representing a date in the future (relative to the current time, ${currentTimestamp}), or 'null'. Do not generate past due dates. Calculate these dates carefully to be truly in the future.
+- **IMPORTANT RULE:** The 'activities' array should contain at most one activity. If an activity is present, it MUST be a single activity describing the creation of the board by the 'createdBy' member (e.g., "Board created by [fullname]"). Do not include any other historical activities.
+- **ENHANCEMENT RULE:** Generate highly detailed and actionable 'tasks' and 'descriptions'. For example, if the project is a "trip to Japan", include specific attractions, booking steps, and packing lists. If it's "app development", include specific features, modules, and testing phases.
+- **ENHANCEMENT RULE:** For tasks that naturally break down into smaller steps, include comprehensive 'checklists' with multiple 'todos'. Ensure 'isDone' is either true or false for checklist items.
 
 Project Description: ${description}
 Timeline: ${timeline || 'No specific deadline'}
+Current Timestamp (ms): ${currentTimestamp}
 Return a complete JSON board object as per the above structure, fulfilling all rules.
 `
 
@@ -374,9 +414,6 @@ Return a complete JSON board object as per the above structure, fulfilling all r
       'DEBUG: Combined prompt being sent to Gemini API:\n',
       combinedPrompt
     )
-
-    // הסרה של קטעי קוד לניפוי באגים של גרסת הספרייה כדי למנוע שגיאות 'require is not defined'
-    // וודא שאתה עדיין עם גרסה עדכנית של הספרייה (@google/generative-ai) באמצעות npm install @google/generative-ai@latest
 
     // שימוש במודל gemini-2.0-flash (מודל מהיר יותר וזמין יותר)
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
@@ -387,8 +424,23 @@ Return a complete JSON board object as per the above structure, fulfilling all r
     let text = await result.response.text() // השתמש ב-let כי אנחנו הולכים לשנות את text
 
     try {
-      // שלב הניקוי הקריטי: הסרת בלוקי קוד של Markdown
+      // שלב ניקוי אגרסיבי יותר:
+      // 1. הסרת בלוקי קוד של Markdown (```json ו-```).
       text = text.replace(/```json\s*/g, '').replace(/\s*```/g, '')
+
+      // 2. ניסיון למצוא את האובייקט ה-JSON הראשון והאחרון
+      const startIndex = text.indexOf('{')
+      const endIndex = text.lastIndexOf('}')
+
+      if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
+        text = text.substring(startIndex, endIndex + 1)
+      } else {
+        // אם לא נמצא בלוק JSON ברור, נדפיס אזהרה ונמשיך עם הטקסט המקורי (אחרי ניקוי markdown)
+        // ייתכן והמודל לא החזיר JSON כלל, או שהיה שבור לגמרי
+        console.warn(
+          '⚠️ Could not find clear JSON block. Attempting to parse raw text as is.'
+        )
+      }
 
       const board = JSON.parse(text)
       res.json(board)

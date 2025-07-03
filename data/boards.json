@@ -1,5 +1,978 @@
 [
   {
+    "title": "Building Tasklo!",
+    "createdAt": 1751491200000,
+    "labels": [
+      { "id": "l300", "title": "Frontend", "color": "#61bd4f" },
+      { "id": "l301", "title": "Backend", "color": "#0079bf" },
+      { "id": "l302", "title": "Design", "color": "#c377e0" },
+      { "id": "l303", "title": "Urgent", "color": "#eb5a46" },
+      { "id": "l304", "title": "QA", "color": "#f2d600" },
+      { "id": "l305", "title": "Docs", "color": "#00c2e0" },
+      { "id": "l306", "title": "Marketing", "color": "#ff9f1a" }
+    ],
+    "createdBy": {
+      "_id": "u2001",
+      "username": "projectlead",
+      "fullname": "Project Lead",
+      "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+    },
+    "style": {
+      "background": "https://images.unsplash.com/photo-1588511986632-592db3d6c81f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "color": null
+    },
+    "members": [
+      {
+        "_id": "u2001",
+        "username": "projectlead",
+        "fullname": "Project Lead",
+        "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg",
+        "createdAt": "2025-07-01T09:00:00.000Z"
+      },
+      {
+        "_id": "u2002",
+        "username": "frontenddev",
+        "fullname": "Jane Frontend",
+        "imgUrl": "https://randomuser.me/api/portraits/women/21.jpg",
+        "createdAt": "2025-07-01T09:30:00.000Z"
+      },
+      {
+        "_id": "u2003",
+        "username": "backenddev",
+        "fullname": "John Backend",
+        "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg",
+        "createdAt": "2025-07-01T10:00:00.000Z"
+      },
+      {
+        "_id": "u2004",
+        "username": "designer",
+        "fullname": "Emily Designer",
+        "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg",
+        "createdAt": "2025-07-01T10:30:00.000Z"
+      },
+      {
+        "_id": "u2005",
+        "username": "qa",
+        "fullname": "QA Specialist",
+        "imgUrl": "https://randomuser.me/api/portraits/men/24.jpg",
+        "createdAt": "2025-07-01T11:00:00.000Z"
+      }
+    ],
+    "groups": [
+      {
+        "title": "Planning",
+        "id": "g1",
+        "tasks": [
+          {
+            "id": "bpma1",
+            "title": "Define MVP features",
+            "status": "done",
+            "description": "List all must-have features for the first release.",
+            "comments": [
+              {
+                "byMember": {
+                  "fullname": "Project Lead",
+                  "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+                },
+                "createdAt": 1751404800000,
+                "txt": "Let's keep it simple and focused.",
+                "id": "c1"
+              }
+            ],
+            "memberIds": ["u2001"],
+            "labelIds": ["l303"],
+            "createdAt": 1751404800000,
+            "dueDate": 1751491200000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": { "background": "#F5CD47" },
+            "groupId": "g1",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+                "title": "Wireframe Example",
+                "createdAt": 1751404800000,
+                "id": "a1"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl1",
+                "title": "MVP Features",
+                "todos": [
+                  {
+                    "title": "User authentication",
+                    "isDone": true,
+                    "id": "t1"
+                  },
+                  {
+                    "title": "Board & task management",
+                    "isDone": true,
+                    "id": "t2"
+                  },
+                  {
+                    "title": "Real-time collaboration",
+                    "isDone": false,
+                    "id": "t3"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma2",
+            "title": "Write project documentation",
+            "status": "in-progress",
+            "description": "Create README, API docs, and onboarding guides.",
+            "comments": [],
+            "memberIds": ["u2001"],
+            "labelIds": ["l305"],
+            "createdAt": 1751491200000,
+            "dueDate": 1751664000000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": {},
+            "groupId": "g1",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl2",
+                "title": "Docs",
+                "todos": [
+                  { "title": "README", "isDone": true, "id": "t4" },
+                  { "title": "API Reference", "isDone": false, "id": "t5" },
+                  { "title": "Onboarding Guide", "isDone": false, "id": "t6" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma16",
+            "title": "Research competitors",
+            "status": "done",
+            "description": "Analyze top project management apps and list their strengths and weaknesses.",
+            "comments": [],
+            "memberIds": ["u2001"],
+            "labelIds": ["l305"],
+            "createdAt": 1751404800000,
+            "dueDate": 1751491200000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": {},
+            "groupId": "g1",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+                "title": "Competitor Analysis",
+                "createdAt": 1751404800000,
+                "id": "a9"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl16",
+                "title": "Research",
+                "todos": [
+                  { "title": "List top 5 apps", "isDone": true, "id": "t39" },
+                  { "title": "Summarize features", "isDone": true, "id": "t40" }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      },
+      {
+        "title": "Design",
+        "id": "g2",
+        "tasks": [
+          {
+            "id": "bpma3",
+            "title": "Create UI mockups",
+            "status": "in-progress",
+            "description": "Design the main screens for the app: dashboard, board, task details, login.",
+            "comments": [
+              {
+                "byMember": {
+                  "fullname": "Emily Designer",
+                  "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg"
+                },
+                "createdAt": 1751491200000,
+                "txt": "Working on the dashboard layout.",
+                "id": "c2"
+              }
+            ],
+            "memberIds": ["u2004"],
+            "labelIds": ["l302"],
+            "createdAt": 1751491200000,
+            "dueDate": 1751577600000,
+            "byMember": {
+              "_id": "u2004",
+              "username": "designer",
+              "fullname": "Emily Designer",
+              "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg"
+            },
+            "style": {
+              "background": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80"
+            },
+            "groupId": "g2",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+                "title": "UI Inspiration",
+                "createdAt": 1751491200000,
+                "id": "a2"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl3",
+                "title": "UI Screens",
+                "todos": [
+                  { "title": "Login page", "isDone": true, "id": "t7" },
+                  { "title": "Dashboard", "isDone": false, "id": "t8" },
+                  { "title": "Task details", "isDone": false, "id": "t9" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma4",
+            "title": "Design logo and branding",
+            "status": "todo",
+            "description": "Create a logo and define the color palette and typography.",
+            "comments": [],
+            "memberIds": ["u2004"],
+            "labelIds": ["l302"],
+            "createdAt": 1751577600000,
+            "dueDate": 1751664000000,
+            "byMember": {
+              "_id": "u2004",
+              "username": "designer",
+              "fullname": "Emily Designer",
+              "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg"
+            },
+            "style": {},
+            "groupId": "g2",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+                "title": "Branding Moodboard",
+                "createdAt": 1751577600000,
+                "id": "a3"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl4",
+                "title": "Branding",
+                "todos": [
+                  { "title": "Logo", "isDone": false, "id": "t10" },
+                  { "title": "Colors", "isDone": false, "id": "t11" },
+                  { "title": "Typography", "isDone": false, "id": "t12" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma17",
+            "title": "Design mobile layout",
+            "status": "todo",
+            "description": "Create responsive designs for mobile devices.",
+            "comments": [],
+            "memberIds": ["u2004"],
+            "labelIds": ["l302"],
+            "createdAt": 1751664000000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2004",
+              "username": "designer",
+              "fullname": "Emily Designer",
+              "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg"
+            },
+            "style": {
+              "background": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80"
+            },
+            "groupId": "g2",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl17",
+                "title": "Mobile",
+                "todos": [
+                  { "title": "Login screen", "isDone": false, "id": "t41" },
+                  { "title": "Board view", "isDone": false, "id": "t42" }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      },
+      {
+        "title": "Development",
+        "id": "g3",
+        "tasks": [
+          {
+            "id": "bpma5",
+            "title": "Setup backend server",
+            "status": "done",
+            "description": "Initialize Node.js server and connect to MongoDB.",
+            "comments": [],
+            "memberIds": ["u2003"],
+            "labelIds": ["l301"],
+            "createdAt": 1751491200000,
+            "dueDate": 1751577600000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g3",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl5",
+                "title": "Setup Steps",
+                "todos": [
+                  {
+                    "title": "Initialize project",
+                    "isDone": true,
+                    "id": "t13"
+                  },
+                  { "title": "Setup database", "isDone": true, "id": "t14" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma6",
+            "title": "Implement authentication",
+            "status": "in-progress",
+            "description": "Add user registration, login, and JWT authentication.",
+            "comments": [
+              {
+                "byMember": {
+                  "fullname": "John Backend",
+                  "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+                },
+                "createdAt": 1751577600000,
+                "txt": "Working on JWT integration.",
+                "id": "c3"
+              }
+            ],
+            "memberIds": ["u2003"],
+            "labelIds": ["l301", "l303"],
+            "createdAt": 1751577600000,
+            "dueDate": 1751664000000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g3",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl6",
+                "title": "Auth Steps",
+                "todos": [
+                  { "title": "Register endpoint", "isDone": true, "id": "t15" },
+                  { "title": "Login endpoint", "isDone": false, "id": "t16" },
+                  { "title": "JWT tokens", "isDone": false, "id": "t17" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma7",
+            "title": "Implement task drag & drop",
+            "status": "todo",
+            "description": "Allow users to drag and drop tasks between groups.",
+            "comments": [],
+            "memberIds": ["u2002"],
+            "labelIds": ["l300"],
+            "createdAt": 1751577600000,
+            "dueDate": 1751664000000,
+            "byMember": {
+              "_id": "u2002",
+              "username": "frontenddev",
+              "fullname": "Jane Frontend",
+              "imgUrl": "https://randomuser.me/api/portraits/women/21.jpg"
+            },
+            "style": {},
+            "groupId": "g3",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl7",
+                "title": "Frontend",
+                "todos": [
+                  { "title": "Drag & drop UI", "isDone": false, "id": "t18" },
+                  { "title": "Update state", "isDone": false, "id": "t19" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma8",
+            "title": "Integrate real-time updates (websockets)",
+            "status": "todo",
+            "description": "Use websockets for live board updates.",
+            "comments": [],
+            "memberIds": ["u2002", "u2003"],
+            "labelIds": ["l300", "l301"],
+            "createdAt": 1751577600000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g3",
+            "attachments": [
+              {
+                "url": "https://websockets.readthedocs.io/en/stable/_static/websockets.svg",
+                "title": "Websockets",
+                "createdAt": 1751577600000,
+                "id": "a4"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl8",
+                "title": "Websockets",
+                "todos": [
+                  { "title": "Backend events", "isDone": false, "id": "t20" },
+                  {
+                    "title": "Frontend listeners",
+                    "isDone": false,
+                    "id": "t21"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma13",
+            "title": "Deploy to GitHub",
+            "status": "in-progress",
+            "description": "Push the project to GitHub and setup repository.",
+            "comments": [
+              {
+                "byMember": {
+                  "fullname": "Jane Frontend",
+                  "imgUrl": "https://randomuser.me/api/portraits/women/21.jpg"
+                },
+                "createdAt": 1751664000000,
+                "txt": "Repo created and first commit pushed.",
+                "id": "c4"
+              }
+            ],
+            "memberIds": ["u2002"],
+            "labelIds": ["l301", "l306"],
+            "createdAt": 1751664000000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2002",
+              "username": "frontenddev",
+              "fullname": "Jane Frontend",
+              "imgUrl": "https://randomuser.me/api/portraits/women/21.jpg"
+            },
+            "style": {
+              "background": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            },
+            "groupId": "g3",
+            "attachments": [
+              {
+                "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                "title": "GitHub Logo",
+                "createdAt": 1751664000000,
+                "id": "a6"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl13",
+                "title": "GitHub Steps",
+                "todos": [
+                  { "title": "Create repository", "isDone": true, "id": "t30" },
+                  { "title": "Push code", "isDone": true, "id": "t31" },
+                  { "title": "Setup README", "isDone": false, "id": "t32" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma18",
+            "title": "Write unit tests",
+            "status": "todo",
+            "description": "Add unit tests for backend and frontend.",
+            "comments": [],
+            "memberIds": ["u2003", "u2002"],
+            "labelIds": ["l301", "l300", "l304"],
+            "createdAt": 1751664000000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g3",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl18",
+                "title": "Tests",
+                "todos": [
+                  { "title": "Backend tests", "isDone": false, "id": "t43" },
+                  { "title": "Frontend tests", "isDone": false, "id": "t44" }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      },
+      {
+        "title": "QA",
+        "id": "g4",
+        "tasks": [
+          {
+            "id": "bpma9",
+            "title": "Test user registration",
+            "status": "todo",
+            "description": "Ensure new users can register and login.",
+            "comments": [],
+            "memberIds": ["u2005"],
+            "labelIds": ["l304"],
+            "createdAt": 1751577600000,
+            "dueDate": 1751664000000,
+            "byMember": {
+              "_id": "u2005",
+              "username": "qa",
+              "fullname": "QA Specialist",
+              "imgUrl": "https://randomuser.me/api/portraits/men/24.jpg"
+            },
+            "style": {},
+            "groupId": "g4",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl9",
+                "title": "Test Cases",
+                "todos": [
+                  {
+                    "title": "Register with valid email",
+                    "isDone": false,
+                    "id": "t22"
+                  },
+                  {
+                    "title": "Register with invalid email",
+                    "isDone": false,
+                    "id": "t23"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma10",
+            "title": "Test drag & drop",
+            "status": "todo",
+            "description": "Verify tasks can be moved between groups.",
+            "comments": [],
+            "memberIds": ["u2005"],
+            "labelIds": ["l304"],
+            "createdAt": 1751664000000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2005",
+              "username": "qa",
+              "fullname": "QA Specialist",
+              "imgUrl": "https://randomuser.me/api/portraits/men/24.jpg"
+            },
+            "style": {},
+            "groupId": "g4",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl10",
+                "title": "QA Steps",
+                "todos": [
+                  {
+                    "title": "Move task to another group",
+                    "isDone": false,
+                    "id": "t24"
+                  },
+                  { "title": "Undo move", "isDone": false, "id": "t25" }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma19",
+            "title": "Cross-browser testing",
+            "status": "todo",
+            "description": "Test the app on Chrome, Firefox, Safari, and Edge.",
+            "comments": [],
+            "memberIds": ["u2005"],
+            "labelIds": ["l304"],
+            "createdAt": 1751750400000,
+            "dueDate": 1751836800000,
+            "byMember": {
+              "_id": "u2005",
+              "username": "qa",
+              "fullname": "QA Specialist",
+              "imgUrl": "https://randomuser.me/api/portraits/men/24.jpg"
+            },
+            "style": {},
+            "groupId": "g4",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+                "title": "Browser Testing",
+                "createdAt": 1751750400000,
+                "id": "a10"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl19",
+                "title": "Browsers",
+                "todos": [
+                  { "title": "Chrome", "isDone": false, "id": "t45" },
+                  { "title": "Firefox", "isDone": false, "id": "t46" },
+                  { "title": "Safari", "isDone": false, "id": "t47" },
+                  { "title": "Edge", "isDone": false, "id": "t48" }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      },
+      {
+        "title": "Deployment",
+        "id": "g5",
+        "tasks": [
+          {
+            "id": "bpma11",
+            "title": "Setup CI/CD pipeline",
+            "status": "todo",
+            "description": "Configure GitHub Actions for automated tests and deployment.",
+            "comments": [],
+            "memberIds": ["u2003"],
+            "labelIds": ["l301", "l305"],
+            "createdAt": 1751664000000,
+            "dueDate": 1751750400000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g5",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+                "title": "CI/CD",
+                "createdAt": 1751664000000,
+                "id": "a5"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl11",
+                "title": "CI/CD",
+                "todos": [
+                  {
+                    "title": "Setup GitHub Actions",
+                    "isDone": false,
+                    "id": "t26"
+                  },
+                  {
+                    "title": "Deploy to production",
+                    "isDone": false,
+                    "id": "t27"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma12",
+            "title": "Deploy to production",
+            "status": "todo",
+            "description": "Deploy the app to production environment (e.g. Heroku, Vercel).",
+            "comments": [],
+            "memberIds": ["u2003"],
+            "labelIds": ["l301"],
+            "createdAt": 1751750400000,
+            "dueDate": 1751836800000,
+            "byMember": {
+              "_id": "u2003",
+              "username": "backenddev",
+              "fullname": "John Backend",
+              "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+            },
+            "style": {},
+            "groupId": "g5",
+            "attachments": [],
+            "checklists": [
+              {
+                "id": "cl12",
+                "title": "Deploy Steps",
+                "todos": [
+                  { "title": "Production build", "isDone": false, "id": "t28" },
+                  {
+                    "title": "Environment variables",
+                    "isDone": false,
+                    "id": "t29"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      },
+      {
+        "title": "Marketing & Launch",
+        "id": "g6",
+        "tasks": [
+          {
+            "id": "bpma14",
+            "title": "Post on LinkedIn",
+            "status": "todo",
+            "description": "Announce the launch of the app on LinkedIn.",
+            "comments": [
+              {
+                "byMember": {
+                  "fullname": "Project Lead",
+                  "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+                },
+                "createdAt": 1751750400000,
+                "txt": "Let's get the word out!",
+                "id": "c5"
+              }
+            ],
+            "memberIds": ["u2001"],
+            "labelIds": ["l306"],
+            "createdAt": 1751750400000,
+            "dueDate": 1751836800000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": {
+              "background": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png"
+            },
+            "groupId": "g6",
+            "attachments": [
+              {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/800px-LinkedIn_logo_initials.png",
+                "title": "LinkedIn Logo",
+                "createdAt": 1751750400000,
+                "id": "a7"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl14",
+                "title": "LinkedIn Steps",
+                "todos": [
+                  { "title": "Write post", "isDone": false, "id": "t33" },
+                  { "title": "Add screenshots", "isDone": false, "id": "t34" },
+                  {
+                    "title": "Share with network",
+                    "isDone": false,
+                    "id": "t35"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma15",
+            "title": "Prepare launch email",
+            "status": "todo",
+            "description": "Draft and send a launch announcement email to all subscribers.",
+            "comments": [],
+            "memberIds": ["u2001"],
+            "labelIds": ["l306"],
+            "createdAt": 1751750400000,
+            "dueDate": 1751836800000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": {},
+            "groupId": "g6",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1515168833906-d2a3b82b302b?auto=format&fit=crop&w=800&q=80",
+                "title": "Email Campaign",
+                "createdAt": 1751750400000,
+                "id": "a8"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl15",
+                "title": "Email Steps",
+                "todos": [
+                  { "title": "Draft email", "isDone": false, "id": "t36" },
+                  { "title": "Add screenshots", "isDone": false, "id": "t37" },
+                  {
+                    "title": "Send to subscribers",
+                    "isDone": false,
+                    "id": "t38"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "bpma20",
+            "title": "Create product video",
+            "status": "todo",
+            "description": "Produce a short video demonstrating the app's features.",
+            "comments": [],
+            "memberIds": ["u2001"],
+            "labelIds": ["l306"],
+            "createdAt": 1751750400000,
+            "dueDate": 1751923200000,
+            "byMember": {
+              "_id": "u2001",
+              "username": "projectlead",
+              "fullname": "Project Lead",
+              "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+            },
+            "style": {
+              "background": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80"
+            },
+            "groupId": "g6",
+            "attachments": [
+              {
+                "url": "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80",
+                "title": "Product Video",
+                "createdAt": 1751750400000,
+                "id": "a11"
+              }
+            ],
+            "checklists": [
+              {
+                "id": "cl20",
+                "title": "Video Steps",
+                "todos": [
+                  { "title": "Write script", "isDone": false, "id": "t49" },
+                  { "title": "Record demo", "isDone": false, "id": "t50" },
+                  { "title": "Edit video", "isDone": false, "id": "t51" }
+                ]
+              }
+            ]
+          }
+        ],
+        "style": {}
+      }
+    ],
+    "activities": [
+      {
+        "id": "act1",
+        "txt": "Added task Define MVP features",
+        "createdAt": 1751404800000,
+        "byMember": {
+          "_id": "u2001",
+          "username": "projectlead",
+          "fullname": "Project Lead",
+          "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+        }
+      },
+      {
+        "id": "act2",
+        "txt": "Commented on task Create UI mockups",
+        "createdAt": 1751491200000,
+        "byMember": {
+          "_id": "u2004",
+          "username": "designer",
+          "fullname": "Emily Designer",
+          "imgUrl": "https://randomuser.me/api/portraits/women/23.jpg"
+        }
+      },
+      {
+        "id": "act3",
+        "txt": "Moved task Implement authentication to In Progress",
+        "createdAt": 1751577600000,
+        "byMember": {
+          "_id": "u2003",
+          "username": "backenddev",
+          "fullname": "John Backend",
+          "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+        }
+      },
+      {
+        "id": "act4",
+        "txt": "Completed task Setup backend server",
+        "createdAt": 1751577600000,
+        "byMember": {
+          "_id": "u2003",
+          "username": "backenddev",
+          "fullname": "John Backend",
+          "imgUrl": "https://randomuser.me/api/portraits/men/22.jpg"
+        }
+      },
+      {
+        "id": "act5",
+        "txt": "Created GitHub repository",
+        "createdAt": 1751664000000,
+        "byMember": {
+          "_id": "u2002",
+          "username": "frontenddev",
+          "fullname": "Jane Frontend",
+          "imgUrl": "https://randomuser.me/api/portraits/women/21.jpg"
+        }
+      },
+      {
+        "id": "act6",
+        "txt": "Posted launch announcement on LinkedIn",
+        "createdAt": 1751750400000,
+        "byMember": {
+          "_id": "u2001",
+          "username": "projectlead",
+          "fullname": "Project Lead",
+          "imgUrl": "https://randomuser.me/api/portraits/men/99.jpg"
+        }
+      }
+    ],
+    "isStarred": true
+  },
+  {
     "title": "Project management",
     "createdAt": 1659002131617,
     "labels": [
@@ -2305,6 +3278,269 @@
         }
       }
     ],
+    "isStarred": false
+  },
+  {
+    "title": "Marketing Campaign Q3",
+    "createdAt": 1751491200000,
+    "labels": [
+      { "id": "l200", "title": "Urgent", "color": "#eb5a46" },
+      { "id": "l201", "title": "Design", "color": "#c377e0" }
+    ],
+    "createdBy": {
+      "_id": "u1001",
+      "username": "alice",
+      "fullname": "Alice Johnson",
+      "imgUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    "style": {
+      "background": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+      "color": null
+    },
+    "members": [
+      {
+        "_id": "u1001",
+        "username": "alice",
+        "fullname": "Alice Johnson",
+        "imgUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "createdAt": "2025-07-01T10:00:00.000Z"
+      },
+      {
+        "_id": "u1002",
+        "username": "bob",
+        "fullname": "Bob Smith",
+        "imgUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+        "createdAt": "2025-07-02T09:00:00.000Z"
+      }
+    ],
+    "groups": [
+      {
+        "title": "To Do",
+        "tasks": [
+          {
+            "id": "mkt1",
+            "title": "Design campaign banner",
+            "status": "todo",
+            "description": "",
+            "comments": [],
+            "memberIds": ["u1001"],
+            "labelIds": ["l201"],
+            "createdAt": 1751491200000,
+            "dueDate": 1751577600000,
+            "byMember": {
+              "_id": "u1001",
+              "username": "alice",
+              "fullname": "Alice Johnson",
+              "imgUrl": "https://randomuser.me/api/portraits/women/44.jpg"
+            },
+            "style": {},
+            "groupId": "grp1",
+            "attachments": []
+          }
+        ],
+        "style": {},
+        "id": "grp1"
+      },
+      {
+        "title": "In Progress",
+        "tasks": [
+          {
+            "id": "mkt2",
+            "title": "Write ad copy",
+            "status": "in-progress",
+            "description": "",
+            "comments": [],
+            "memberIds": ["u1002"],
+            "labelIds": ["l200"],
+            "createdAt": 1751404800000,
+            "dueDate": 1751491200000,
+            "byMember": {
+              "_id": "u1002",
+              "username": "bob",
+              "fullname": "Bob Smith",
+              "imgUrl": "https://randomuser.me/api/portraits/men/32.jpg"
+            },
+            "style": {},
+            "groupId": "grp2",
+            "attachments": []
+          }
+        ],
+        "style": {},
+        "id": "grp2"
+      }
+    ],
+    "activities": [],
+    "isStarred": false
+  },
+
+  {
+    "title": "Team Onboarding",
+    "createdAt": 1751404800000,
+    "labels": [{ "id": "l210", "title": "HR", "color": "#00c2e0" }],
+    "createdBy": {
+      "_id": "u1003",
+      "username": "carol",
+      "fullname": "Carol Lee",
+      "imgUrl": "https://randomuser.me/api/portraits/women/65.jpg"
+    },
+    "style": {
+      "background": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80",
+      "color": null
+    },
+    "members": [
+      {
+        "_id": "u1003",
+        "username": "carol",
+        "fullname": "Carol Lee",
+        "imgUrl": "https://randomuser.me/api/portraits/women/65.jpg",
+        "createdAt": "2025-07-02T08:00:00.000Z"
+      }
+    ],
+    "groups": [
+      {
+        "title": "Onboarding Tasks",
+        "tasks": [
+          {
+            "id": "onb1",
+            "title": "Setup email account",
+            "status": "done",
+            "description": "",
+            "comments": [],
+            "memberIds": ["u1003"],
+            "labelIds": ["l210"],
+            "createdAt": 1751404800000,
+            "dueDate": 1751404800000,
+            "byMember": {
+              "_id": "u1003",
+              "username": "carol",
+              "fullname": "Carol Lee",
+              "imgUrl": "https://randomuser.me/api/portraits/women/65.jpg"
+            },
+            "style": {},
+            "groupId": "grp3",
+            "attachments": []
+          }
+        ],
+        "style": {},
+        "id": "grp3"
+      }
+    ],
+    "activities": [],
+    "isStarred": false
+  },
+
+  {
+    "title": "Website Redesign",
+    "createdAt": 1751318400000,
+    "labels": [
+      { "id": "l220", "title": "Design", "color": "#c377e0" },
+      { "id": "l221", "title": "Frontend", "color": "#61bd4f" }
+    ],
+    "createdBy": {
+      "_id": "u1004",
+      "username": "dave",
+      "fullname": "Dave Miller",
+      "imgUrl": "https://randomuser.me/api/portraits/men/45.jpg"
+    },
+    "style": {
+      "background": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+      "color": null
+    },
+    "members": [
+      {
+        "_id": "u1004",
+        "username": "dave",
+        "fullname": "Dave Miller",
+        "imgUrl": "https://randomuser.me/api/portraits/men/45.jpg",
+        "createdAt": "2025-07-01T12:00:00.000Z"
+      }
+    ],
+    "groups": [
+      {
+        "title": "Design",
+        "tasks": [
+          {
+            "id": "web1",
+            "title": "Create wireframes",
+            "status": "done",
+            "description": "",
+            "comments": [],
+            "memberIds": ["u1004"],
+            "labelIds": ["l220"],
+            "createdAt": 1751318400000,
+            "dueDate": 1751404800000,
+            "byMember": {
+              "_id": "u1004",
+              "username": "dave",
+              "fullname": "Dave Miller",
+              "imgUrl": "https://randomuser.me/api/portraits/men/45.jpg"
+            },
+            "style": {},
+            "groupId": "grp4",
+            "attachments": []
+          }
+        ],
+        "style": {},
+        "id": "grp4"
+      }
+    ],
+    "activities": [],
+    "isStarred": false
+  },
+
+  {
+    "title": "Customer Support",
+    "createdAt": 1751232000000,
+    "labels": [{ "id": "l230", "title": "Support", "color": "#0079bf" }],
+    "createdBy": {
+      "_id": "u1005",
+      "username": "eve",
+      "fullname": "Eve Adams",
+      "imgUrl": "https://randomuser.me/api/portraits/women/50.jpg"
+    },
+    "style": {
+      "background": "https://images.unsplash.com/photo-1515168833906-d2a3b82b302b?auto=format&fit=crop&w=800&q=80",
+      "color": null
+    },
+    "members": [
+      {
+        "_id": "u1005",
+        "username": "eve",
+        "fullname": "Eve Adams",
+        "imgUrl": "https://randomuser.me/api/portraits/women/50.jpg",
+        "createdAt": "2025-07-01T14:00:00.000Z"
+      }
+    ],
+    "groups": [
+      {
+        "title": "Tickets",
+        "tasks": [
+          {
+            "id": "sup1",
+            "title": "Reply to customer email",
+            "status": "in-progress",
+            "description": "",
+            "comments": [],
+            "memberIds": ["u1005"],
+            "labelIds": ["l230"],
+            "createdAt": 1751232000000,
+            "dueDate": 1751318400000,
+            "byMember": {
+              "_id": "u1005",
+              "username": "eve",
+              "fullname": "Eve Adams",
+              "imgUrl": "https://randomuser.me/api/portraits/women/50.jpg"
+            },
+            "style": {},
+            "groupId": "grp5",
+            "attachments": []
+          }
+        ],
+        "style": {},
+        "id": "grp5"
+      }
+    ],
+    "activities": [],
     "isStarred": false
   }
 ]
