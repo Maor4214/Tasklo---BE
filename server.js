@@ -8,11 +8,13 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import passport from 'passport'
 
 import { authRoutes } from './api/auth/auth.routes.js'
 import { boardService } from './services/board.service.js'
 import { setupSocketAPI } from './services/socket.service.js'
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 
 const app = express()
 const server = http.createServer(app)
@@ -29,6 +31,8 @@ app.use(
     cookie: { secure: false },
   })
 )
+app.use(passport.initialize())
+app.use(passport.session())
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve('public')))
@@ -52,6 +56,49 @@ app.all('/*all', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.get('/api', (req, res) => {
   res.send('Welcome to Tasklo API!')
+})
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: '/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log('✅ Google Profile:', profile)
+      return done(null, profile)
+    }
+  )
+)
+
+passport.serializeUser((user, done) => done(null, user))
+passport.deserializeUser((user, done) => done(null, user))
+
+//google login routes
+
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+)
+
+app.get(
+  '/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  (req, res) => {
+    res.redirect('https://tasklo.onrender.com/board')
+  }
+)
+
+app.get('/auth/profile', (req, res) => {
+  if (!req.isAuthenticated()) return res.status(401).send('Not logged in')
+  res.send(req.user)
+})
+
+app.get('/auth/logout', (req, res) => {
+  req.logout(() => {
+    res.redirect('/')
+  })
 })
 
 // ====== Board Routes ======
