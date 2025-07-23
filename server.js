@@ -31,23 +31,30 @@ app.use(
     secret: 'tasklo-is-the-best',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false },
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction ? 'None' : 'Lax',
+    },
   })
 )
 app.use(passport.initialize())
 app.use(passport.session())
 
+
 const corsOptions = {
-  origin: [
-    'https://your-frontend.onrender.com', // <-- Replace with your actual frontend URL
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'http://localhost:5174',
-  ],
+  origin: isProduction
+    ? 'https://tasklo.onrender.com' 
+    : [
+        'http://127.0.0.1:3000',
+        'http://localhost:3000',
+        'http://127.0.0.1:5173',
+        'http://localhost:5173',
+        'http://127.0.0.1:5174',
+        'http://localhost:5174',
+      ],
   credentials: true,
 }
 app.use(cors(corsOptions))
-
 app.all('/*all', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
