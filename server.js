@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
+import axios from 'axios'
 import http from 'http'
 import path from 'path'
 import cors from 'cors'
@@ -31,30 +32,27 @@ app.use(
     secret: 'tasklo-is-the-best',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction ? 'None' : 'Lax',
-    },
+    cookie: { secure: false },
   })
 )
 app.use(passport.initialize())
 app.use(passport.session())
 
-
-const corsOptions = {
-  origin: isProduction
-    ? 'https://tasklo.onrender.com' 
-    : [
-        'http://127.0.0.1:3000',
-        'http://localhost:3000',
-        'http://127.0.0.1:5173',
-        'http://localhost:5173',
-        'http://127.0.0.1:5174',
-        'http://localhost:5174',
-      ],
-  credentials: true,
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve('public')))
+} else {
+  const corsOptions = {
+    origin: [
+      'https://tasklo.onrender.com', 
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://localhost:5174',
+    ],
+    credentials: true,
+  }
+  app.use(cors(corsOptions))
 }
-app.use(cors(corsOptions))
+
 app.all('/*all', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
