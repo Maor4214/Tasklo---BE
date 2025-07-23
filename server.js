@@ -270,13 +270,37 @@ app.get('/test-board', async (req, res) => {
 
 app.post('/api/ai/board', async (req, res) => {
   try {
-    const { description, timeline } = req.body
-
-    // קבלת זמן נוכחי במילישניות כדי לעזור למודל לחשב תאריכים עתידיים
+    const { description, timeline, user } = req.body
     const currentTimestamp = Date.now()
+
+    let userPrompt = ''
+    if (user && user._id) {
+      userPrompt = `
+- The board's "createdBy" field MUST be set to this user:
+  {
+    "_id": "${user._id}",
+    "username": "${user.username}",
+    "fullname": "${user.fullname}",
+    "imgUrl": "${user.imgUrl}"
+  }
+- The "members" array MUST contain only this user.
+- DO NOT generate any random members, comments, or activities except for a single board creation activity by this user.
+- Only generate tasks (to-do list items, project steps, etc.) relevant to the project description.
+- All tasks should be assigned to this user.
+- All comments arrays should be empty.
+- All activities arrays should contain at most one activity: board creation by this user.
+`;
+    } else {
+      userPrompt = `
+- The board's "createdBy" field MUST be null.
+- The "members" array should contain a few realistic random members.
+- Generate realistic comments, activities, and assignments as before.
+`;
+    }
 
     const combinedPrompt = `
 You are a helpful assistant that creates project boards like Trello.
+${userPrompt}
 Your main goal is to generate a project board that precisely matches the provided JSON structure.
 You MUST adhere to this structure strictly and DO NOT invent new keys, object types, or deviate from the specified formats.
 **IMPORTANT:** Your entire response MUST be valid JSON, and nothing else. Do not include any preambles, explanations, or additional text outside the JSON object.
@@ -419,40 +443,40 @@ Current Timestamp (ms): ${currentTimestamp}
 Return a complete JSON board object as per the above structure, fulfilling all rules.
 `
 
-    // --- הדפסה לניפוי באגים: הפרומפט המאוחד שנשלח למודל ---
+
     console.log(
       'DEBUG: Combined prompt being sent to Gemini API:\n',
       combinedPrompt
     )
 
-    // שימוש במודל gemini-2.0-flash (מודל מהיר יותר וזמין יותר)
+
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
 
-    // קריאת generateContent עם הפרומפט המאוחד (מחרוזת יחידה)
+
     const result = await model.generateContent(combinedPrompt)
 
-    let text = await result.response.text() // השתמש ב-let כי אנחנו הולכים לשנות את text
+    let text = await result.response.text() 
 
     try {
-      // שלב ניקוי אגרסיבי יותר:
-      // 1. הסרת בלוקי קוד של Markdown (```json ו-```).
+ 
       text = text.replace(/```json\s*/g, '').replace(/\s*```/g, '')
 
-      // 2. ניסיון למצוא את האובייקט ה-JSON הראשון והאחרון
+
       const startIndex = text.indexOf('{')
       const endIndex = text.lastIndexOf('}')
 
       if (startIndex !== -1 && endIndex !== -1 && endIndex > startIndex) {
         text = text.substring(startIndex, endIndex + 1)
       } else {
-        // אם לא נמצא בלוק JSON ברור, נדפיס אזהרה ונמשיך עם הטקסט המקורי (אחרי ניקוי markdown)
-        // ייתכן והמודל לא החזיר JSON כלל, או שהיה שבור לגמרי
+    
         console.warn(
           '⚠️ Could not find clear JSON block. Attempting to parse raw text as is.'
         )
       }
 
       const board = JSON.parse(text)
+      // Enforce createdBy is null for guests
+      if (!user || !user._id) board.createdBy = null;
       res.json(board)
     } catch (err) {
       console.error('❌ Failed to parse AI JSON. Raw text received:', text)
